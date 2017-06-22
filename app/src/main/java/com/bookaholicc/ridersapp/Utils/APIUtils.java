@@ -93,4 +93,6 @@ public class APIUtils {
     public static String FROM_WHERE = "fromWhere";
     public static String RIDER_ID = "riderId";
 
+    public static String CHANGE_DELIVERY_STATUS = "";
+    public static String DELIVERY_STATUS = "0";
 }

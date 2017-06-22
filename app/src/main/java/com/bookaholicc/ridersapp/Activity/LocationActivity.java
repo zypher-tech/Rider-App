@@ -37,7 +37,6 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
         setContentView(R.layout.location_activity);
         ButterKnife.bind(this);
 
-
         if (getIntent() != null) {
             String orderJson = getIntent().getStringExtra(BundleKey.ARG_ORDER);
             Gson gs = new Gson();
