@@ -17,7 +17,8 @@ public class BundleKey {
     public static final String ARG_SHOW_PRODUCT = "PROD";
     public static final String IS_MAP_STARTED = "MAP_STARTED";
     public static final String ARG_LAST_NAME = "LAST_NAME";
-
+    public static final String LAT = "LAT";
+    public static final String LON = "LON";
 
 
 

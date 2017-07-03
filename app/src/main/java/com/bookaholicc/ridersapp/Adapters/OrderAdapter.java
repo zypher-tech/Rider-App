@@ -1,11 +1,13 @@
 package com.bookaholicc.ridersapp.Adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bookaholicc.ridersapp.Model.MiniProduct;
@@ -15,6 +17,7 @@ import com.bookaholicc.ridersapp.R;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by nandhu on 22/6/17.
@@ -45,11 +48,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
     public void onBindViewHolder(OrderAdapter.OrderHolder holder, int position) {
 
         final Order order = mList.get(position);
-        holder.mPhoneNumber.setText(order.getPhoneNumber());
-        holder.mUserName.setText(order.getFirstName());
-        holder.orderId.setText(order.getOrderId());
-
-        holder.mDetailsButton.setOnClickListener(new View.OnClickListener() {
+        holder.mOrderId.setText(""+order.getOrderId());
+        holder.mOrderName.setText(""+order.getAmount());
+        holder.mOrderName.setText(order.getFirstName());
+        holder.mSeeDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mCallback != null){
@@ -57,16 +59,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
                 }
             }
         });
-
-        holder.mMapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mCallback != null){
-                    mCallback.seeLocation(order);
-                }
-            }
-        });
-
     }
 
     @Override
@@ -76,16 +68,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
 
     public static class  OrderHolder extends RecyclerView.ViewHolder{
 
-        @BindView(R.id.order_item_name)
-        TextView mUserName;
-        @BindView(R.id.order_item_orderid) TextView orderId;
-        @BindView(R.id.order_item_phone_number) TextView mPhoneNumber;
-        @BindView(R.id.see_details)
-        Button mDetailsButton;
-        @BindView(R.id.map_button) Button mMapButton;
+
+
+        @BindView(R.id.order_id) TextView mOrderId;
+        @BindView(R.id.order_name) TextView mOrderName;
+        @BindView(R.id.order_amount) TextView mAmount;
+        @BindView(R.id.see_details) Button mSeeDetailsButton;
+
 
         public OrderHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this,itemView);
         }
     }
 

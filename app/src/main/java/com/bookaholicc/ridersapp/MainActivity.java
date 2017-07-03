@@ -1,5 +1,6 @@
 package com.bookaholicc.ridersapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -12,7 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.bookaholicc.ridersapp.Activity.SignUpActivity;
 import com.bookaholicc.ridersapp.Adapters.HomePagerAdapter;
+import com.bookaholicc.ridersapp.DataStore.DataStore;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +37,14 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        DataStore mDataStore = DataStore.getStorageInstance(this);
+        if (mDataStore.isFirstTime()){
+            // start Login Activity
+            final Intent i  = new Intent(this, SignUpActivity.class);
+            startActivity(i);
+            finish();
+        }
 
 
         //set up the Adapter

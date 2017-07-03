@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/nandhu/.android/build-cache/a2cb8531e12932b0865aaa56a2e1b06ecb793128/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="4b17463c814bdc562fb0392fa3494063623a0904">
+        <dex dex="/home/nandhu/Production/BookAholic/Android/RidersApp/app/build/intermediates/pre-dexed/debug/classes_7692f56a695dead3025b179f786dd4671e0b4826.jar" />
+    </item>
+
+</items>

@@ -35,4 +35,16 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return 2;
     }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position){
+            case 0:
+                return "New Orders";
+            case 1:
+                return "Returns";
+        }
+
+        return null;
+    }
 }

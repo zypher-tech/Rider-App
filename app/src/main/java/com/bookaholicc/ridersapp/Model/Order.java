@@ -15,9 +15,9 @@ public class Order  {
     private boolean isAccepted;
     private List<MiniProduct> mList;
     private boolean orderStatus;
-    private  String orderId;
-    private String amount;
-    private String userId;
+    private int orderId;
+    private int amount;
+    private int userId;
     private  String firstName;
     private String lastName;
     private String phoneNumber;
@@ -31,9 +31,10 @@ public class Order  {
     private Timestamp deliveredAt;
     private Timestamp returnedAt;
     private Timestamp returnCondtion;
+    private int deliveryStatus;
 
 
-    public Order(List<MiniProduct> mProduct, String amount, String phoneNumber, double orderLat, double orderLon, String userName, String orderId, String userId) {
+    public Order(List<MiniProduct> mProduct, int amount, String phoneNumber, double orderLat, double orderLon, String userName, int orderId, int userId) {
         this.mList = mProduct;
         this.amount = amount;
         this.phoneNumber = phoneNumber;
@@ -42,6 +43,15 @@ public class Order  {
         this.firstName = userName;
         this.userId = userId;
         this.orderId = orderId;
+    }
+
+
+    public int getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(int deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
     }
 
     public boolean isAccepted() {
@@ -68,27 +78,27 @@ public class Order  {
         this.orderStatus = orderStatus;
     }
 
-    public String getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import static com.bookaholicc.ridersapp.Utils.APIUtils.RIDER_ID;
+
 /**
  * Created by nandhu on 16/3/17.
  *
@@ -95,7 +97,7 @@ public class DataStore {
 
 
     public  String getRiderId() {
-        return mSharedPrefrences.getString(USER_ID,null);
+        return mSharedPrefrences.getString(RIDER_ID,null);
     }
 
     public void setEmailId(String emailIdTag) {
@@ -119,21 +121,13 @@ public class DataStore {
         editor.commit();
     }
 
-    public  void setPhoneNumberTag(String phoneNumberTag) {
-        editor.putString(PHONE_NUMBER_TAG, phoneNumberTag);
+    public  void setPhoneNumberT(String phoneNumber) {
+        editor.putString(PHONE_NUMBER_TAG, phoneNumber);
         editor.commit();
     }
 
 
-    public  String getStateId() {
-        return mSharedPrefrences.getString(STATE_ID,null);
-    }
 
-
-
-    public  String getStateName() {
-        return mSharedPrefrences.getString(STATE_NAME,null);
-    }
 
     public  String getUserName() {
         return mSharedPrefrences.getString(USER_NAME_TAG,null);
@@ -334,5 +328,25 @@ public class DataStore {
 
     public String getToken() {
         return mSharedPrefrences.getString(TOKEN,null);
+    }
+
+    public void saveRiderName(String name) {
+
+    }
+
+    public void saveRiderId(int riderId) {
+
+        editor.putInt(RIDER_ID,riderId);
+        editor.apply();
+
+    }
+
+
+    public void saveEmail(String email) {
+
+    }
+
+    public void savePhoneNumber(String phoneNmber) {
+
     }
 }

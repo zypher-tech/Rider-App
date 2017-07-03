@@ -9,9 +9,9 @@ package com.bookaholicc.ridersapp.Model;
 public class MiniProduct {
     private String productName;
     private String imageURL;
-    private String pid;
+    private int pid;
 
-    public MiniProduct(String productName, String imageURL, String pid) {
+    public MiniProduct(String productName, String imageURL, int pid) {
         this.productName = productName;
         this.imageURL = imageURL;
         this.pid = pid;
@@ -33,11 +33,11 @@ public class MiniProduct {
         this.imageURL = imageURL;
     }
 
-    public String getPid() {
+    public int getPid() {
         return pid;
     }
 
-    public void setPid(String pid) {
+    public void setPid(int pid) {
         this.pid = pid;
     }
 }

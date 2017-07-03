@@ -16,9 +16,11 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by nandhu on 23/6/17.
+ *
  */
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductListHolder>{
@@ -44,7 +46,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public void onBindViewHolder(ProductListHolder holder, int position) {
         Picasso.with(mContext)
-                .load(mList.get(position).getImageURL());
+                .load(mList.get(position).getImageURL())
+                .into(holder.mpImage);
+        ;
         holder.mPname.setText(mList.get(position).getProductName());
     }
 
@@ -60,7 +64,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         TextView mPname;
         public ProductListHolder(View itemView) {
             super(itemView);
-        }
+            ButterKnife.bind(this,itemView);        }
     }
 
 }

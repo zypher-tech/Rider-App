@@ -1,5 +1,6 @@
 package com.bookaholicc.ridersapp.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,6 +60,8 @@ public class OrdersFragment extends Fragment implements Response.ErrorListener, 
     @BindView(R.id.orders_root_frame)
     FrameLayout mRootFrame;
 
+    ProgressDialog mDialog;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +91,19 @@ public class OrdersFragment extends Fragment implements Response.ErrorListener, 
         super.onActivityCreated(savedInstanceState);
     }
 
+    private void showProgressView() {
+        mDialog = new ProgressDialog(mContext);
+        mDialog.setTitle("Getting latest Information");
+        mDialog.setIndeterminate(true);
+        mDialog.show();
+    }
+
+    private void hideProgresDialog() {
+        if (mDialog != null && mDialog.isShowing()){
+            mDialog.dismiss();
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,6 +112,7 @@ public class OrdersFragment extends Fragment implements Response.ErrorListener, 
 
 
 
+        showProgressView();
         try {
             getOrders();
         } catch (Exception e) {
@@ -139,12 +156,8 @@ public class OrdersFragment extends Fragment implements Response.ErrorListener, 
     }
 
     public void getOrders() throws Exception {
-        JSONObject mObject = new JSONObject();
-        DataStore mStore = DataStore.getStorageInstance(mContext);
 
-        String riderId = mStore.getRiderId();
-        mObject.put(APIUtils.RIDER_ID, riderId);
-        JsonObjectRequest mRequest = new JsonObjectRequest(Method.POST, APIUtils.RIDER_GET_ORDERS_API, mObject, this, this);
+        JsonObjectRequest mRequest = new JsonObjectRequest(Method.POST, APIUtils.RIDER_GET_ORDERS_API, null, this, this);
         AppRequestQueue mAppRequestQueue = AppRequestQueue.getInstance(mContext);
         mAppRequestQueue.addToRequestQue(mRequest);
 
@@ -160,7 +173,7 @@ public class OrdersFragment extends Fragment implements Response.ErrorListener, 
     @Override
     public void onResponse(JSONObject response) {
 
-
+        Log.d(TAG, "onResponse: "+response.toString());
         List<Order> mOrdersList = parseResponse(response);
         showOrders(mOrdersList);
     }
@@ -180,10 +193,11 @@ public class OrdersFragment extends Fragment implements Response.ErrorListener, 
         catch (Exception e){
             Log.d(TAG, "showOrders: Exception in Inflating VIew "+e.getLocalizedMessage());
         }
-
+        hideProgresDialog();
         RecyclerView mListView = (RecyclerView) v.findViewById(R.id.rv_list);
         mListView.setLayoutManager(new LinearLayoutManager((mContext)));
         OrderAdapter mAdapter = new OrderAdapter(mOrdersList,mContext,this);
+        mListView.setAdapter(mAdapter);
 
     }
 
@@ -196,18 +210,20 @@ public class OrdersFragment extends Fragment implements Response.ErrorListener, 
             JSONArray mResp = response.getJSONArray("orders");
             for (int i = 0; i < mResp.length(); i++) {
                 JSONObject mObject = mResp.getJSONObject(i);
-                String userId = mObject.getString(APIUtils.USER_ID);
+                int userId = mObject.getInt(APIUtils.USER_ID);
                 String userName = mObject.getString(APIUtils.FIRST_NAME);
-                String orderId = mObject.getString(APIUtils.ORDER_ID);
+                int orderId = mObject.getInt(APIUtils.ORDER_ID);
                 double orderLat = mObject.getDouble(APIUtils.ORDER_LAT);
                 double orderLon = mObject.getDouble(APIUtils.ORDER_LON);
                 String phoneNumber = mObject.getString(APIUtils.ORDER_ID);
-                String amount = mObject.getString(APIUtils.AMOUNT);
+                int amount = mObject.getInt(APIUtils.AMOUNT);
                 String Address = mObject.getString(APIUtils.ORDER_ID);
                 List<MiniProduct> mProduct = parseProducts(mObject.getJSONArray(APIUtils.PRODUCTS_KEYWORD));
                 mList.add(new Order(mProduct, amount, phoneNumber, orderLat, orderLon, userName, orderId, userId));
 
             }
+
+            return mList;
         } catch (Exception e) {
             Log.d(TAG, "Exception in Parsing Response  " + e.getLocalizedMessage());
         }
@@ -222,7 +238,7 @@ public class OrdersFragment extends Fragment implements Response.ErrorListener, 
             for (int i = 0; i < mArray.length(); i++) {
                 JSONObject mObject = mArray.getJSONObject(i);
                 String pName = mObject.getString(APIUtils.PRODUCT_NAME);
-                String pid = mObject.getString(APIUtils.PID);
+                int pid = mObject.getInt(APIUtils.PID);
                 String imageURL = mObject.getString(APIUtils.IMAGE_URL);
                 mlist.add(new MiniProduct(pName, imageURL, pid));
             }

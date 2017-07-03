@@ -34,7 +34,7 @@ public class APIUtils {
 
         //The Keys Assciated with that time
     public static final String PID = "pid";
-    public static final String PRODUCT_NAME = "pName";
+    public static final String PRODUCT_NAME = "productName";
     public static final String PRODUCT_DESC = "productDescription";
     public static final String AUTHOR_NAME = "authorName";
     public static final String MRP = "MRP";
@@ -53,16 +53,14 @@ public class APIUtils {
     public static final String UNIT_1 = "unit";
     public static final String UNIT_2 = "timeUnit";
     public static final String UNIT_3 = "price";
-
-
-
-
-
-
+    public static final String RIDER_NAME = "riderName";
+    public static final String RIDER_EMAIL = "emailAddress";
+    public static final String REGISTER_RIDER_API = "https://us-central1-bookaholic-786.cloudfunctions.net/registerRider";
+    public static final String STATUS = "status";
 
 
     /*Pass in "riderId - to get Orders Assigned to this Rider*/
-    public static String RIDER_GET_ORDERS_API = "";
+    public static String RIDER_GET_ORDERS_API = "https://us-central1-bookaholic-786.cloudfunctions.net/getUndeliveredOrders";
     public static String SAVE_TOKEN_API = "";
 
 
@@ -93,6 +91,7 @@ public class APIUtils {
     public static String FROM_WHERE = "fromWhere";
     public static String RIDER_ID = "riderId";
 
-    public static String CHANGE_DELIVERY_STATUS = "";
+    public static String CHANGE_DELIVERY_STATUS = "https://us-central1-bookaholic-786.cloudfunctions.net/changeDeliveryStatus";
     public static String DELIVERY_STATUS = "0";
+    public static String PASSWORD ="password";
 }
