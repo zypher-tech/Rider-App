@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bookaholicc.ridersapp.Adapters.ProductListAdapter;
 import com.bookaholicc.ridersapp.DataStore.DataStore;
+import com.bookaholicc.ridersapp.MainActivity;
 import com.bookaholicc.ridersapp.Model.MiniProduct;
 import com.bookaholicc.ridersapp.Model.Order;
 import com.bookaholicc.ridersapp.Network.AppRequestQueue;
@@ -186,7 +187,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements Response.
 
         showProgressView();
         int orderId = or.getOrderId();
-        String riderId = null;
+        int riderId = 0;
         String phoneNumber = null;
         String riderName = null;
         DataStore mStore = DataStore.getStorageInstance(this);
@@ -223,8 +224,9 @@ public class OrderDetailsActivity extends AppCompatActivity implements Response.
     @Override
     public void onResponse(JSONObject response) {
         hideProgresDialog();
+        Log.d(TAG, "onResponse: "+response.toString());
         try {
-            int b = response.getInt(APIUtils.DELIVERY_STATUS);
+            int b = response.getInt(APIUtils.STATUS);
             if (b==1){
                 //Delivered
                 showOrderFulfilled();
@@ -236,6 +238,24 @@ public class OrderDetailsActivity extends AppCompatActivity implements Response.
     }
 
     private void showOrderFulfilled() {
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(OrderDetailsActivity.this);
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Sucess!");
+
+        // Setting Dialog Message
+        alertDialog.setMessage("Order FullFilled");
+
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                dialog.dismiss();
+                finish();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+
+            }
+        });
+        alertDialog.show();
 
     }
 

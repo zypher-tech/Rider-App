@@ -96,8 +96,8 @@ public class DataStore {
     }
 
 
-    public  String getRiderId() {
-        return mSharedPrefrences.getString(RIDER_ID,null);
+    public  int getRiderId() {
+        return mSharedPrefrences.getInt(RIDER_ID,0);
     }
 
     public void setEmailId(String emailIdTag) {
@@ -347,6 +347,7 @@ public class DataStore {
     }
 
     public void savePhoneNumber(String phoneNmber) {
-
+            editor.putString(PHONE_NUMBER_TAG,phoneNmber);
+        editor.apply();
     }
 }
